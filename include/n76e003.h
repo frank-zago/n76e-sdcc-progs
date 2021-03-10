@@ -84,8 +84,6 @@ SFR(SBUF, 0x99);
 SFR(SBUF_1, 0x9A);
 SFR(EIE, 0x9B);
 SFR(EIE1, 0x9C);
-SFR(CHPCON, 0x9F); //TA Protection
-
 enum {
 	EIE_ET2_BIT  = (1 << 7),
 	EIE_ESPI_BIT = (1 << 6),
@@ -94,8 +92,10 @@ enum {
 	EIE_EPWM_BIT = (1 << 3),
 	EIE_ECAP_BIT = (1 << 2),
 	EIE_EPI_BIT  = (1 << 1),
-	EIE_EI2C_BIT = (1 << 1),
+	EIE_EI2C_BIT = (1 << 0),
 };
+
+SFR(CHPCON, 0x9F); //TA Protection
 
 SFR(P2, 0xA0);
 SFR(AUXR1, 0xA2);
@@ -115,6 +115,14 @@ SFR(P3M2, 0xAD);
 SFR(P3SR, 0xAD); //Page1
 SFR(IAPFD, 0xAE);
 SFR(IAPCN, 0xAF);
+
+/* Follows Table 21-1. IAP Modes and Command Codes */
+enum ipa_modes {
+    READ_UID = 0x04,
+    DID_READ = 0x0c,
+    CID_READ = 0x0b,
+    LDROM_READ = 0x40,
+};
 
 SFR(P3, 0xB0);
 SFR(P0M1, 0xB1);
@@ -257,6 +265,7 @@ SFR(PDTEN, 0xF9); //TA Protection
 SFR(PDTCNT, 0xFA); //TA Protection
 SFR(PMEN, 0xFB);
 SFR(PMD, 0xFC);
+SFR(PORDIS, 0xFD); //TA Protection
 SFR(EIP1, 0xFE);
 SFR(EIPH1, 0xFF);
 
@@ -374,7 +383,6 @@ SBIT(IE0,    0x88, 1);
 SBIT(IT0,    0x88, 0);
 
 /*  P0  */
-
 SBIT(P07,    0x80, 7);
 SBIT(RXD,    0x80, 7);
 SBIT(P06,    0x80, 6);
@@ -390,14 +398,26 @@ SBIT(MISO,   0x80, 1);
 SBIT(P00,    0x80, 0);
 SBIT(MOSI,   0x80, 0);
 
-#define TA_UNPROTECT() do { \
-		TA = 0xAA; \
-		TA = 0x55; \
-	} while(0)
-
-#define SFR_PAGE(n) do { \
-		TA_UNPROTECT(); \
-		SFRS = n; \
-	} while (0)
+/* Interrupts. */
+enum {
+	INT_EXT0 = 0,
+	INT_T0_OVERFLOW = 1,
+	INT_EXT1 = 2,
+	INT_T1_OVERFLOW = 3,
+	INT_UART0 = 4,
+	INT_T2_EVENT = 5,
+	INT_I2C = 6,
+	INT_PIN = 7,
+	INT_BROWN_OUT = 8,
+	INT_SPI = 9,
+	INT_WDT = 10,
+	INT_ADC = 11,
+	INT_CAPTURE = 12,
+	INT_PWM = 13,
+	INT_FAULT_BREAK = 14,
+	INT_UART1 = 15,
+	INT_T3_OVERFLOW = 16,
+	INT_WAKE_UP = 17,
+};
 
 #endif
