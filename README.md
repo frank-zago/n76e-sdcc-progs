@@ -37,6 +37,7 @@ Examples
 --------
 
 - blink: blink the builtin LED
+- uart:  send a short message every 2 seconds, on serial port at 115200 8N1.
 
 
 Licensing

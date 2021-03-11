@@ -12,7 +12,7 @@ $(NAME).ihx: $(NAME).c $(LDLIBS)
 	sdcc $(CFLAGS) -mmcs51 --out-fmt-ihx -o $@ $^ $(LDLIBS)
 
 isp: $(NAME).bin
-	nvtispflash -a $^
+	nvtispflash -a $^ $(ISP_OPTS)
 
 clean:
 	rm -f *.bin *.ihx $(NAME).map $(NAME).mem $(NAME).rst $(NAME).lk \

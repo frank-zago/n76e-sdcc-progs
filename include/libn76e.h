@@ -12,5 +12,8 @@
 /* MCU initialization. Should be called first by programs. */
 void init_n76e(void);
 
+/* Initializes UART0 */
+void init_uart0(void);
+
 /* Busy wait for the given amount of milliseconds */
 void delay(uint16_t msec);

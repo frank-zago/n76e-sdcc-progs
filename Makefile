@@ -2,7 +2,8 @@ TOPTARGETS := all clean
 
 SUBDIRS := \
 	lib/ \
-	examples/blink
+	examples/blink \
+	examples/uart
 
 $(TOPTARGETS): $(SUBDIRS)
 $(SUBDIRS):
