@@ -108,6 +108,7 @@ SFR(IAPTRG, 0xA4); //TA Protection
 SFR(IAPUEN, 0xA5);	//TA Protection
 SFR(IAPAL, 0xA6);
 SFR(IAPAH, 0xA7);
+SFR16(IAPA, 0xA6);
 
 SFR(IE, 0xA8);
 SFR(SADDR, 0xA9);

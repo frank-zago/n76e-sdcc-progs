@@ -17,3 +17,27 @@ void init_uart0(void);
 
 /* Busy wait for the given amount of milliseconds */
 void delay(uint16_t msec);
+
+/* Enable / disable IAP. Must be disabled once access is over. */
+static inline void iap_enable(void)
+{
+	__data uint8_t save_ea;
+
+	save_ea = EA;
+	EA = 0;
+	ta_prot(CHPCON |= 1);
+	EA = save_ea;
+}
+
+static inline void iap_disable(void)
+{
+	__data uint8_t save_ea;
+
+	save_ea = EA;
+	EA = 0;
+	ta_prot(CHPCON &= ~1);
+	EA = save_ea;
+}
+
+/* Use IAP to read a location */
+uint8_t iap_read(enum ipa_modes mode, uint16_t addr);
