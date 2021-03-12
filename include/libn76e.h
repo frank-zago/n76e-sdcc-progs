@@ -5,6 +5,11 @@
 
 #include <n76e003.h>
 
+static inline void nop(void)
+{
+	__asm__ ("nop");
+}
+
 /* Provide TA protection to use some special register. The expression
  * MUST compile to a single instruction. */
 #define ta_prot(EXPR) do { TA = 0xaa; TA = 0x55; EXPR; } while(0)
@@ -41,3 +46,7 @@ static inline void iap_disable(void)
 
 /* Use IAP to read a location */
 uint8_t iap_read(enum ipa_modes mode, uint16_t addr);
+
+/* WS2812 control. Call reset then send the colors in a loop. */
+void ws_reset(void);
+void ws_send_color(uint8_t R, uint8_t G, uint8_t B);

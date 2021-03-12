@@ -4,7 +4,7 @@ CFLAGS += -I../include
 
 all: libn76.lib
 
-libn76.lib: init.o delay.o uart0.o putchar.o iap.o
+libn76.lib: init.o delay.o uart0.o putchar.o iap.o ws2812.o
 	sdar -rc $@ $^
 
 %.o: %.c ../include/libn76e.h ../include/n76e003.h

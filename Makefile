@@ -4,7 +4,8 @@ SUBDIRS := \
 	lib/ \
 	examples/blink \
 	examples/iap \
-	examples/uart
+	examples/uart \
+	examples/ws2812
 
 $(TOPTARGETS): $(SUBDIRS)
 $(SUBDIRS):
