@@ -40,6 +40,7 @@ Examples
 - uart:  send a short message every 2 seconds, on serial port at 115200 8N1.
 - iap:   with the IAP, read the MCU UID, company ID and device ID.
 - ws2812: a basic LED effect for a ws2812 strip.
+- bmp280-i2c: read temperature and pressure from a BMP280 using I2C
 
 
 Licensing
