@@ -41,6 +41,7 @@ Examples
 - iap:   with the IAP, read the MCU UID, company ID and device ID.
 - ws2812: a basic LED effect for a ws2812 strip.
 - bmp280-i2c: read temperature and pressure from a BMP280 using I2C
+- bmp280-spi: read temperature and pressure from a BMP280 using SPI
 
 
 Licensing

@@ -67,3 +67,7 @@ void i2c_enable_master(void);
 int i2c_write(void);
 int i2c_read(void);
 void i2c_isr(void);
+
+/* SPI */
+void init_spi_master(uint8_t cpol, uint8_t cpha);
+uint8_t spi_transfer(uint8_t value);
