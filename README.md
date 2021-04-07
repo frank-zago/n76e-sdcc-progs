@@ -42,6 +42,7 @@ Examples
 - ws2812: a basic LED effect for a ws2812 strip.
 - bmp280-i2c: read temperature and pressure from a BMP280 using I2C
 - bmp280-spi: read temperature and pressure from a BMP280 using SPI
+- wii-nunchuk: read input data from a Nintendo Wii Nunchuk
 
 
 Licensing

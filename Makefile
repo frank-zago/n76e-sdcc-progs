@@ -6,6 +6,7 @@ SUBDIRS := \
 	examples/bmp280-i2c \
 	examples/bmp280-spi \
 	examples/iap \
+	examples/wii-nunchuk \
 	examples/uart \
 	examples/ws2812
 
