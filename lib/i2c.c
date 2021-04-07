@@ -7,6 +7,8 @@
  * to create a second bus on the P02/P16 pins.
 */
 
+#include <string.h>
+
 #include <libn76e.h>
 
 #define I2C_ACK_R 1		/* R/W bit in address field */
@@ -19,8 +21,13 @@ enum i2c_status {
 	I2C_ST_ERROR,
 };
 
+/* I2C state machine. */
+__xdata struct i2c_op i2c_op;
+
 void init_i2c(void)
 {
+	memset(&i2c_op, 0, sizeof(i2c_op));
+
 	/* P13, P14 in open-drain mode */
 	P1M1 |= (1 << 3);
 	P1M2 |= (1 << 3);
@@ -59,6 +66,7 @@ void i2c_enable_master(void)
 	I2CEN = 1;
 }
 
+/* Interrupt driven state machine */
 void i2c_isr(void)
 {
 	switch (I2STAT)	{
@@ -147,11 +155,9 @@ void i2c_isr(void)
 	while (I2CSTO);
 }
 
-int i2c_write(void)
+int i2c_write(uint8_t len)
 {
-	if (i2c_op.len == 0 || i2c_op.len > sizeof(i2c_op.buf))
-		return 1;
-
+	i2c_op.len = len;
 	i2c_op.addr &= ~I2C_ACK_R;	/* Write */
 	i2c_op.status = I2C_ST_INIT;
 	i2c_op.idx = 0;
@@ -163,9 +169,10 @@ int i2c_write(void)
 	return i2c_op.status != I2C_ST_WR_OK;
 }
 
-int i2c_read(void)
+int i2c_read(uint8_t len)
 {
-	i2c_op.addr |= I2C_ACK_R;		/* Read */
+	i2c_op.len = len;
+	i2c_op.addr |= I2C_ACK_R;	/* Read */
 	i2c_op.status = I2C_ST_INIT;
 	i2c_op.idx = 0;
 

@@ -21,10 +21,6 @@
 #include <libn76e.h>
 #include <bmp280.h>
 
-/* The user must declare these in their own code for linkage
- * purposes. */
-__xdata struct i2c_op i2c_op;
-
 void bmp280_i2c_isr(void) __interrupt (INT_I2C)
 {
 	i2c_isr();
@@ -36,15 +32,13 @@ static int bmp_read(uint8_t reg, int len)
 	int rc;
 
 	i2c_op.buf[0] = reg;
-	i2c_op.len = 1;
-	rc = i2c_write();
+	rc = i2c_write(1);
 
 	if (rc)
 		return 1;
 
 	/* Read result */
-	i2c_op.len = len;
-	rc = i2c_read();
+	rc = i2c_read(len);
 
 	return rc;
 }
@@ -53,8 +47,7 @@ static int bmp_read(uint8_t reg, int len)
 static int bmp_write(uint8_t reg, int len)
 {
 	i2c_op.buf[0] = reg;
-	i2c_op.len = 1 + len;
-	return i2c_write();
+	return i2c_write(1 + len);
 }
 
 void main(void)
@@ -90,7 +83,6 @@ void main(void)
 	puts("Addressing the BMP280");
 
 	/* Initialize i2c op */
-	memset(&i2c_op, 0, sizeof(i2c_op));
 	i2c_op.addr = sla_addr << 1;
 	i2c_op.buf = bmp280_data.buf;
 

@@ -64,8 +64,8 @@ struct i2c_op {
 extern __xdata struct i2c_op i2c_op;
 void init_i2c(void);
 void i2c_enable_master(void);
-int i2c_write(void);
-int i2c_read(void);
+int i2c_write(uint8_t len);
+int i2c_read(uint8_t len);
 void i2c_isr(void);
 
 /* SPI */
