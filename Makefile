@@ -2,6 +2,7 @@ TOPTARGETS := all clean
 
 SUBDIRS := \
 	lib/ \
+	examples/aht10 \
 	examples/blink \
 	examples/bmp280-i2c \
 	examples/bmp280-spi \
