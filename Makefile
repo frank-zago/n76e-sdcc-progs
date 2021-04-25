@@ -7,8 +7,9 @@ SUBDIRS := \
 	examples/bmp280-i2c \
 	examples/bmp280-spi \
 	examples/iap \
-	examples/wii-nunchuk \
+	examples/max7219-matrix \
 	examples/uart \
+	examples/wii-nunchuk \
 	examples/ws2812
 
 $(TOPTARGETS): $(SUBDIRS)
