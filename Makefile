@@ -8,6 +8,7 @@ SUBDIRS := \
 	examples/bmp280-spi \
 	examples/iap \
 	examples/max7219-matrix \
+	examples/stepmotor \
 	examples/uart \
 	examples/wii-nunchuk \
 	examples/ws2812
