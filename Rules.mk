@@ -6,10 +6,10 @@ CFLAGS += -I$(TOPDIR)/include/
 LDLIBS += $(TOPDIR)/lib/libn76.lib
 
 $(NAME).bin: $(NAME).ihx
-	makebin -p $^ $@
+	$(SDCC_PREFIX)makebin -p $^ $@
 
 $(NAME).ihx: $(NAME).c $(LDLIBS)
-	sdcc $(CFLAGS) -mmcs51 --out-fmt-ihx -o $@ $^ $(LDLIBS)
+	$(SDCC_PREFIX)sdcc $(CFLAGS) -mmcs51 --out-fmt-ihx -o $@ $^ $(LDLIBS)
 
 isp: $(NAME).bin
 	nvtispflash -a $^ $(ISP_OPTS)

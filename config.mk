@@ -8,3 +8,8 @@ CFLAGS += -DLED_BUILTIN=P15
 
 # Data Pin used for the WS2812 LED strip
 CFLAGS += -DWS_PIN=P05
+
+# Fedora prefixes all sdcc tools with sdcc-.
+ifneq (,$(wildcard /usr/bin/sdcc-sdcc))
+	export SDCC_PREFIX ?= sdcc-
+endif
