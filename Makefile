@@ -9,6 +9,7 @@ SUBDIRS := \
 	examples/iap \
 	examples/max7219-matrix \
 	examples/stepmotor \
+	examples/tm1637 \
 	examples/uart \
 	examples/wii-nunchuk \
 	examples/ws2812

@@ -71,3 +71,19 @@ void i2c_isr(void);
 /* SPI */
 void init_spi_master(uint8_t cpol, uint8_t cpha);
 uint8_t spi_transfer(uint8_t value);
+
+/* Configuration for the TM1637 */
+struct tm1637 {
+	/* Content of each of the 6 7-segment displays. */
+	uint8_t displays[6];
+
+	/* Number of 7-segment displays. 0 to 6. */
+	uint8_t count : 3;
+
+	/* On (1) or off (0) */
+	uint8_t on : 1;
+
+	/* Brightness of the display. 0 is low, 7 is high. */
+	uint8_t brightness : 3;
+};
+void update_tm1637(const struct tm1637 *display);
